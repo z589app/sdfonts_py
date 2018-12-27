@@ -20,6 +20,7 @@ ampy put sample/main.py
 
 ## Usage
 #### Basic Usage
+```
 from m5stack_print import M5StackPrint
 import uos ## if use SD
 
@@ -28,20 +29,25 @@ uos.mountsd() ## if use SD
 FONTPATH = '/sd/font/FONT.BIN' ## Your FONT.BIN path
 m5p = M5StackPrint(FONTPATH) ## PrintWrapper
 m5p.print(u"aAあア亜\n")
+```
 
 #### Options
+```
 m5p.font_size = 16 ## Size
 m5p.font_color = 0xFFFFFF ## Font Color
 m5p.back_color = 0x444444 ## BackGround Color
 m5p.rect = (0, 0, 320, 240) ## Text Area Rect(StartX, StarY, Width, Height)
 m5p.append = False ## Append On/Off
+```
 
 ####  Usage for Append
+```
 m5p.append = True ## Append On/Off
 m5p.clear()
 m5p.print(u"a") ## Show "a"
 m5p.print(u"b") ## Show "ab"
 m5p.print(u"c") ## Show "abc"
+```
 
 
 ## License
