@@ -1,9 +1,9 @@
 # sdfonts_py
 
-## $B35MW(B
-- M5Stack, MicroPython$B$G$NF|K\8lI=<(%i%$%V%i%j$G$9!#(B
-- [Tamakichi/Arduino-KanjiFont-Library-SD](https://github.com/Tamakichi/Arduino-KanjiFont-Library-SD)$B$r;HMQ(B
-  - $B>e(BArduino$BMQ%i%$%V%i%j$+$i4X?tL>Ey$rGR<Z$7$F$$$^$9$,!":n@.<T$OJL?M$G$9!#(B
+## 概要
+- M5Stack, MicroPythonでの日本語表示ライブラリです。
+- [Tamakichi/Arduino-KanjiFont-Library-SD](https://github.com/Tamakichi/Arduino-KanjiFont-Library-SD)を使用
+  - 上Arduino用ライブラリから関数名等を拝借していますが、作成者は別人です。
 - 
 
 ## Run Sample for M5Stack
@@ -27,7 +27,7 @@ uos.mountsd() ## if use SD
 
 FONTPATH = '/sd/font/FONT.BIN' ## Your FONT.BIN path
 m5p = M5StackPrint(FONTPATH) ## PrintWrapper
-m5p.print(u"aA$B$"%"0!(B\n")
+m5p.print(u"aAあア亜\n")
 
 #### Options
 m5p.font_size = 16 ## Size
