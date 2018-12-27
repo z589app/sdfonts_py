@@ -56,8 +56,10 @@ class SDFonts:
     )
 
     ## 
-    _fontSize = EXFONT[0]
-    _fontNo = EXFONT[0]+FULL_OFST
+    _fontSize = 0
+    _fontNo = FULL_OFST
+    ##TMP _fontSize = EXFONT[0]
+    ##TMP _fontNo = EXFONT[0]+FULL_OFST
     ## _code = 0
 
     _open_font = None
