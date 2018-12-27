@@ -6,26 +6,46 @@ import machine
 
 FONTPATH = '/sd/font/FONT.BIN'
 
-btnAStr = u'あ'
 
-def btnA_pressed():
-    lcd.clear()
+def th_time():
+
+    _thread.allowsuspend(True)
 
     m5p_date = M5StackPrint(FONTPATH, font_size=16, rect=(0,0,16*6,16*1))
     m5p_date.font_color = 0xFF8080
     m5p_time = M5StackPrint(FONTPATH, font_size=16, rect=(16*7,0,16*6,16*1))
     m5p_time.font_color = 0x80FF80
-    m5p_mess = M5StackPrint(FONTPATH, font_size=16, rect=(0,16*2,320,240-16*2))
-
     
     ## Time
-    t = utime.localtime()
-    t_date = u"{:04}/{:02}/{:02}".format(t[0], t[1], t[2])
-    t_time = u"{:02}:{:02}:{:02}".format(t[3], t[4], t[5])
+    for i in range(10):
+        t = utime.localtime()
+        t_date = u"{:04}/{:02}/{:02}".format(t[0], t[1], t[2])
+        t_time = u"{:02}:{:02}:{:02}".format(t[3], t[4], t[5])
 
-    m5p_date.print(t_date)
-    m5p_time.print(t_time)
+        m5p_date.print(t_date)
+        m5p_time.print(t_time)
 
+        utime.sleep_ms(1000)
+        
+
+
+
+btnAStr = u'あ'
+thid = None
+
+def btnA_pressed():
+    lcd.clear()
+
+    m5p_mess = M5StackPrint(FONTPATH, font_size=16, rect=(0,16*2,320,240-16*2))
+
+    import _thread
+    global thid
+    if thid==None:
+        thid = _thread.start_new_thread("THTIME", th_time, None)
+    else:
+        _thread.kill(thid)
+        thid = None
+    
     ## Message
     global btnAStr
     s = btnAStr
@@ -42,17 +62,6 @@ def btnA_pressed():
 
     m5p_mess.print(mess)
 
-    ## Time
-    for i in range(10):
-        t = utime.localtime()
-        t_date = u"{:04}/{:02}/{:02}".format(t[0], t[1], t[2])
-        t_time = u"{:02}:{:02}:{:02}".format(t[3], t[4], t[5])
-
-        m5p_date.print(t_date)
-        m5p_time.print(t_time)
-
-        utime.sleep_ms(1000)
-        
     
 
 def btnB_pressed():
