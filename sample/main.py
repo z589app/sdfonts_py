@@ -5,10 +5,11 @@ import uos
 import machine
 import time
 import sdfonts_py
+import _thread
 
 FONTPATH = '/sd/font/FONT.BIN'
 
-def th_time_tmp():
+def th_time():
 
     ## _thread.allowsuspend(True)
 
@@ -27,52 +28,6 @@ def th_time_tmp():
         m5p_time.print(t_time)
 
         time.sleep(1)
-        
-
-def th_time_tmp2_old():
-    print("Th Start")
-    m5p_date = M5StackPrint(FONTPATH, font_size=16, rect=(0,0,16*6,16*1))
-    t = utime.localtime()
-    t_date = u"{:04}/{:02}/{:02}".format(t[0], t[1], t[2])
-
-    
-    SDFont = sdfonts_py.SDFonts()
-    SDFont.open(FONTPATH)
-    b = SDFont.getFontData(u'あ')
-    print(b)
-    ## m5p_date.print(t_date)
-    print("Th End")
-
-def th_time_tmp2():
-    print("Th Start")
-    m5p_date = M5StackPrint(FONTPATH, font_size=16, rect=(0,0,16*6,16*1))
-    t = utime.localtime()
-    t_date = u"{:04}/{:02}/{:02}".format(t[0], t[1], t[2])
-    m5p_date.print(t_date)
-
-    print("Th End")
-
-
-def th_time():
-    rtc = machine.RTC()
-    sys.tz('JST-9')
-    print("Synchronize time from NTP server ...")
-    lcd.println("Synchronize time from NTP server ...")
-    rtc.ntp_sync(server="ntp.nict.jp")
- 
-    lcd.clear()
-    lcd.setBrightness(200)
- 
-    lcd.font(lcd.FONT_7seg, fixedwidth=True, dist=16, width=2)
- 
-    while True:
-        d = time.strftime("%Y-%m-%d", time.localtime())
-        t = time.strftime("%H:%M:%S", time.localtime())
-        lcd.print(d, lcd.CENTER, 50, lcd.ORANGE)
-        lcd.print(t, lcd.CENTER, 130, lcd.ORANGE)
-        time.sleep(1)
-
-
 
 btnAStr = u'あ'
 
@@ -98,11 +53,8 @@ def btnA_pressed():
     m5p_mess.print(mess)
 
     ## Thread
-    import _thread
     _thread.stack_size(0xB0000)
-    thid = _thread.start_new_thread("THTIME", th_time_tmp, ())
-
-    
+    thid = _thread.start_new_thread("THTIME", th_time, ())
     
 
 def btnB_pressed():
@@ -124,10 +76,7 @@ def btnB_pressed():
     m5p_wifi.print(u"Connected RTC\n")
 
 def btnC_pressed():
-    ## lcd.clear()
-    import _thread
-    _thread.stack_size(0xB0000)
-    thid = _thread.start_new_thread("THTIME", th_time_tmp2, ())
+    lcd.clear()
 
 if __name__ == '__main__':
 
@@ -146,8 +95,4 @@ if __name__ == '__main__':
 
     lcd.clear()
     m5p.print(u"aAあア亜\n")
-
-
-    ## import _thread
-    ## thid = _thread.start_new_thread("THTIME", th_time, ())
 
