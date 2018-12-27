@@ -47,3 +47,7 @@ m5p.print(u"c") ## Show "abc"
 ## License
 MIT.
 
+
+## Memo.
+- _thread使うときは、stack size注意。
+- 
