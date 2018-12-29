@@ -55,5 +55,4 @@ MIT.
 
 
 ## Memo.
-- _thread使うときは、stack size注意。
 - 
