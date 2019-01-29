@@ -84,6 +84,9 @@ class M5StackPrint:
 
             w = SDFont.getWidth()
             h = SDFont.getHeight()
+
+            self._putc(b, x=x, y=y, fg=fg, bg=bg, w=w, h=h)
+
             x += w
             if x > end_x:
                 x = start_x
@@ -95,7 +98,6 @@ class M5StackPrint:
                     else:
                         break ## over
 
-            self._putc(b, x=x, y=y, fg=fg, bg=bg, w=w, h=h)
 
         self._last_xy = (x, y)
         SDFont.close()
