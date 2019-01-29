@@ -17,6 +17,7 @@ ampy put sdfonts_py/m5stack_print.py
 ampy put sample/simple_wifi.py
 ampy put sample/main.py
 ```
+![m5stack_sample](sdffonts_py_sample.jpg "sample")
 
 ## Usage
 #### Basic Usage
