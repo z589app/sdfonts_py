@@ -90,4 +90,5 @@ ENV/
 .ropeproject
 
 FONT.BIN
+config.json
 

@@ -11,11 +11,17 @@
 0. Download FONT.BIN from https://github.com/Tamakichi/Arduino-KanjiFont-Library-SD/tree/master/fontbin
 0. Put files to M5Stack
 ```
-ampy put FONT.BIN /sd/font/FONT.BIN
-ampy put sdfonts_py/sdfonts_py.py
-ampy put sdfonts_py/m5stack_print.py
-ampy put sample/simple_wifi.py
-ampy put sample/main.py
+$ alias ampy='ampy -p /dev/ttyS3 -b 115200'
+$ ampy put FONT.BIN /sd/font/FONT.BIN
+$ ampy put sdfonts_py/sdfonts_py.py
+$ ampy put sdfonts_py/m5stack_print.py
+
+$ ampy put sample/simple_wifi.py
+$ ampy put sample/main.py
+
+$ echo '{"wifi":{"ssid":"YOUR_SSID","password":"YOUR_PASS"}}' > config.json 
+$ ampy put config.json /flash/config.json
+
 ```
 ![m5stack_sample](sdffonts_py_sample.jpg "sample")
 
