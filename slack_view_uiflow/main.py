@@ -80,26 +80,36 @@ def getSlack():
     response = urequests.get(url)
     ## response = urequests.get(url, data=payload)
 
+    ## 受け取ったJSONをタイムスタンプでソートしtextだけ抽出
     json_data = response.json()
     messages = json_data["messages"]
     texts = sorted(messages, key=lambda mes: mes['ts'], reverse=False)
     texts = [m['text'] for m in texts]
-    ## ## 後ろから数えて行って超えたら終わり。
-    ## MAX_LINE, MAX_CHAR = 8, 13 ##?
-    ## l, c = 0, 0
-    ## i = 1
-    ## for text in reversed(texts):
-    ##     l += text.count('\n')
-    ##     for t in text.split('\n'):
-    ##         l += (len(str(t)) // MAX_CHAR)
-    ##     if l >= MAX_LINE:
-    ##         break
-    ##     i += 1
-    ##     
-    ## for text in texts[5-i:]:
-    ##     m5p.print(text + "\n")
-    for text in texts:
-        m5p.print(text + "\n")
+
+    ## 後ろから数えて超えたら終わり。
+    MAX_LINE, MAX_CHAR = 8, 13 ##?
+    line_count, mess_start = 0, 0
+    for text in reversed(texts):
+        while(not text.find("\n\n")):
+            text = text.replace("\n\n", "\n")
+        line_count += text.count('\n')
+        for t in text.split('\n'):
+            line_count += (len(str(t)) // MAX_CHAR)
+        if line_count >= MAX_LINE:
+            mess_start -= 1
+            break
+        mess_start += 1
+        line_count += 1
+
+    if mess_start==-1:
+        ## 最新のが行数オーバーなら切り落として表示。
+        for t in texts[COUNT-1].split("\n")[:MAX_LINE]:
+            m5p.print(t + "\n")
+    else:
+        ## 最新のを表示
+        for text in texts[COUNT-1-mess_start:]:
+            m5p.print(text + "\n")
+
     m5p = None
 
 def btnA_pressed():
