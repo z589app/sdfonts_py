@@ -66,7 +66,7 @@ def connectWIFI():
     m5p_wifi.print(u"Connected RTC\n")
 
 def getSlack():
-    m5p = M5StackPrint(FONTPATH, font_size=24, rect=(0,16*2,320-16,16*8),
+    m5p = M5StackPrint(FONTPATH, font_size=24, rect=(0,16+4,320-16*1,480-1),
         append=True)
     m5p.clear() ## if append=True
 
@@ -85,6 +85,7 @@ def getSlack():
     messages = json_data["messages"]
     texts = sorted(messages, key=lambda mes: mes['ts'], reverse=False)
     texts = [m['text'] for m in texts]
+    print(texts)
 
     ## 後ろから数えて超えたら終わり。
     MAX_LINE, MAX_CHAR = 8, 13 ##?
@@ -100,6 +101,7 @@ def getSlack():
             break
         mess_start += 1
         line_count += 1
+    print(mess_start, line_count)
 
     if mess_start==-1:
         ## 最新のが行数オーバーなら切り落として表示。
